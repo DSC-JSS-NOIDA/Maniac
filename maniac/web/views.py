@@ -16,5 +16,11 @@ def leader_board(request):
 def rules(request):
     return render(request, 'web/rules.html')
 
+def register(request):
+    return render(request, 'web/register.html')
+
+def login(request):
+    return render(request, 'web/login.html')
+
 def about_us(request):
     return render(request, 'web/aboutus.html')

@@ -1,0 +1,35 @@
+{% load static %}
+{% block content %}
+<div class="container" id="reg-page">
+
+	<div class="reg-form">
+		<form>
+			<div class="col s6">
+				<input type="text" placeholder="Username" name="username" required="">
+			</div>
+			<div class="col s6">
+				<input type="text" placeholder="Your Name" name="name" required="">
+			</div>
+
+			<div class="col s6">
+				<input type="email" placeholder="Email" name="email" required="">
+			</div>
+			<div class="col s6">
+				<input type="text" placeholder="Contact Number" name="contact_number" required="">
+			</div>
+			<div class="col s6">
+				<input type="text" placeholder="College Name" name="college_name" required="">
+			</div>
+			<div class="col s6">
+				<input type="text" placeholder="Password" name="password_1" required="">
+			</div>
+			<div class="col s6">
+				<input type="text" placeholder="Password" name="password_2" required="">
+			</div>
+			<div class="col s6">
+				<input type="submit" placeholder="Password" name="password_2" required="">
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}
