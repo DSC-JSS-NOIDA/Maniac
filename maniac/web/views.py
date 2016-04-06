@@ -6,6 +6,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpRespons
 from django.db.models import Q
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import auth
+from django.contrib.auth import logout
 
 from web.models import UserDetail, Question, QuestionSolved
 
@@ -119,5 +120,6 @@ def leaderboard(request):
     users = UserDetail.objects.order_by('-CurrentQuestionNo')[:7:1]
     return render_to_response("leaderboard.html",{'users':users},context_instance = RequestContext(request))
 
-def logout(request):
-    return HttpResponse("you will be logged out")
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('index'))
