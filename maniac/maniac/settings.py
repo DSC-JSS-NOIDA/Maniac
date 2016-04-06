@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'autofixture',
 )
 
 MIDDLEWARE_CLASSES = (
