@@ -1,3 +1,10 @@
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Sansita One', cursive;
+}
+a,p,span,li,label,input{
+	font-family: 'Noto Serif', serif;
+}
+
 /*------------------------------Nav Bar-----------------------------------------*/
 .brand-logo{
 	padding-left:15px !important;
@@ -6,7 +13,8 @@ nav{
 	background-color:#263238;
 	color:#5A6D76;
 }
-.nav-wrapper{
+.nav-wrapper li a{
+	font-family: 'Sansita One', cursive;
 }
 
 
@@ -65,13 +73,34 @@ nav{
 
 }
 #reg-submit {
+	background-color:#000;
+	color:#fff;
+	border:0;
 	padding:5px 15px;
 	margin-bottom:20px;
+	box-shadow: inset 0 0 0 0 #000;
+	transition: all ease 0.6s;
+	-webkit-transition: all ease 0.6s;
+		-moz-transition: all ease 0.6s;
 }
+#reg-submit:hover{
+  	box-shadow: inset 200px 0 0 0 #fff;
+  	color: #000;
+  }
 #log-submit{
+	background-color:#000;
+	border:0;
+	color:#fff;
 	padding:5px 15px;
 	margin-bottom:20px;
+	box-shadow: inset 0 0 0 0 #000;
+	transition: all ease 0.4s;
+	-webkit-transition: all ease 0.6s;
+		-moz-transition: all ease 0.6s;
 }
+#log-submit:hover{
+  	box-shadow: inset 200px 0 0 0 #009966;
+  }
 #error-msg{
 	color:red;
 }
@@ -113,8 +142,12 @@ nav{
 	height:100%;
 }
 .question-text{
-	max-width:700px;
+	max-width:800px;
 	padding:20px;
+	text-align:justify;
+}
+.question-text p{
+	font-size:18px;
 }
 .answer-panel{
 	padding:10px;
@@ -122,12 +155,14 @@ nav{
 #ans-submit{
 	padding:5px 15px;
 }
-
+.answer-panel h5{
+	padding-left:10px;
+}
 @media screen and (min-width:480px){
 	.comic_img{
 	position:absolute;
 	right:0;
-	bottom:0;
+	top:100px;
 	}
 }
 
@@ -140,6 +175,7 @@ nav{
 .about-text{
 	max-width:700px;
 	padding:20px;
+	text-align:justify;
 }
 .about-panel{
 	padding:20px;
@@ -147,6 +183,8 @@ nav{
 
 /*----------------------------------Rules------------------------------------------*/
 #rules_wrapper{
+	/*background:url("../images/marvel.jpg") no-repeat center;*/
+	background-size:cover;
 	position:relative;
 	width:100%;
 	height:100%;
@@ -154,6 +192,10 @@ nav{
 .rules-text{
 	max-width:700px;
 	padding:20px;
+	text-align:justify;
+}
+.rules-text li{
+	font-size:18px;
 }
 .rules-panel{
 	padding:20px;
