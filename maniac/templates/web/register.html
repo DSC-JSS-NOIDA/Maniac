@@ -2,11 +2,10 @@
 {% load static %}
 {% block content %}
 <div class="reg-wrapper">
-	<img src="{% static 'images/google.jpg' %}">
 		<div class="row reg-form">
-				<h3 class="center-align">Register Here</h3>
+				<h4 class="center-align">Register Here</h4>
 				<p class="center-align">Already Register?? <a href="/login">Login</a></p>
-			    <form class="col s12">
+			    <form id="registration-form">
 			      <div class="row">
 			        <div class="input-field col s12">
 			        	<i class="material-icons prefix">person_pin</i>
@@ -57,8 +56,8 @@
 			        </div>
 			      </div>
 			      <div class="row">
-			        <div class="input-field col s12">
-						<input id="submit" type="submit">
+			        <div class="input-field col s12 center-align">
+						<input id="reg-submit" type="submit" value="register">
 			        </div>
 			      </div>
 			    </form>
