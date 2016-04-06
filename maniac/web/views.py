@@ -22,5 +22,10 @@ def register(request):
 def login(request):
     return render(request, 'web/login.html')
 
+def question(request):
+    return render(request, 'web/question.html')
+
 def about(request):
     return render(request, 'web/about.html')
+
+

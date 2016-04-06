@@ -1,1 +1,14 @@
-<p>This is leaderboard</p>
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<h3 class="center-align">LEADERBOARD</h3>
+	<ul class="collection">
+	    <li class="collection-item avatar">
+	      <i class="material-icons circle">face</i>
+	      <p class="title">Name</p>
+	    </li>
+	</ul>
+</div>
+{% endblock %}
+

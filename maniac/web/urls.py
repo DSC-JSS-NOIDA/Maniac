@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^rules/', views.rules, name="rules"),
     url(r'^register/', views.register, name="register"),
     url(r'^login/', views.login, name="login"),
-
+    url(r'^question/', views.question, name="question"),
 
 ]

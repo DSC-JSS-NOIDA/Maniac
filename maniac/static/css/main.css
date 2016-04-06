@@ -1,3 +1,35 @@
+/*------------------------------Nav Bar-----------------------------------------*/
+.brand-logo{
+	padding-left:15px !important;
+}
+nav{
+	background-color:#263238;
+	color:#5A6D76;
+}
+.nav-wrapper{
+}
+
+
+
+/*-----------------------------------Index Page----------------------------------*/
+#main_wrapper{
+	position:relative;
+	width:100%;
+	height:100%;
+}
+.detailed-text{
+	max-width:700px;
+	padding:20px;
+}
+.login-btns{
+	padding:20px;
+}
+.spark_plug{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+
 /*--------------------------------Register Page------------------------------------*/
 .reg-wrapper{
 	position: relative;
@@ -21,5 +53,29 @@
 	opacity:0.7;
 }
 /*----------------Register Page---------------*/
+
+
+/*----------------------------------LeaderBoard--------------------------------------*/
+
+
+/*----------------------------------Questions------------------------------------------*/
+#question_wrapper{
+	position:relative;
+	width:100%;
+	height:100%;
+}
+.question-text{
+	max-width:700px;
+	padding:20px;
+}
+.answer-panel{
+	padding:20px;
+}
+.comic_img{
+	position:absolute;
+	right:0;
+	bottom:0;
+}
+
 
 
