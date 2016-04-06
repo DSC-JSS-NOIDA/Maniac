@@ -3,9 +3,10 @@
 {% block content %}
 <div id="question_wrapper">
 	<div class="">
+	{% if question %}
 		<div class="question-text">
-			<h5>Question:1</h5>
-			<p>Lorem ipsum dolor sit amet, sapien egestas vel maiores, elit wisi tempus aliquam eros at at, pede maecenas arcu et eu tincidunt, tincidunt et integer. Sem vitae mattis, ullamcorper nec, vestibulum erat. Placerat enim, amet pede optio, integer in, ipsum bibendum ipsum consequat, bibendum placerat commodo fringilla eros eros. Sed augue nunc sollicitudin, curabitur et porttitor eros odio, sapien elit phasellus condimentum consectetuer, non quam nunc metus ultrices, non viverra dictum sem vel sed. Eum etiam pellentesque lorem praesent suspendisse, vel vitae in cras aute, sodales donec mi, in et porta lorem. At pellentesque fringilla dolor quisque pellentesque eu, velit sed eget, nibh a nam semper dolor massa, laborum massa, arcu est scelerisque mattis aliquam ipsum scelerisque. Enim nibh praesent tellus tincidunt, convallis quam, laoreet congue massa wisi blandit lobortis pede, laoreet luctus condimentum, nunc suspendisse. Morbi integer, bibendum ornare pretium aut lobortis nulla, nisl libero. Eros curabitur fames non, hendrerit sagittis ipsum, proin accumsan tellus vitae.</p>
+			<h5>Question:{{question.id}}</h5>
+			<p>{{ question.description }}</p>
 		</div>
 		<div class="answer-panel">
 			<h5>Your Answer</h5>
@@ -19,9 +20,14 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
+	{% else %}
+		{% if warning %}
+			<p>{{ warning }}</p>
+		{% endif %}
+	{% endif %}
 	</div>
-	<div class="comic_img">
+<!-- 	<div class="comic_img">
 		<img src="{% static 'images/hurry_up.jpg'%}" class="responsive-img">
-	</div>
+	</div> -->
 </div>
 {% endblock %}
