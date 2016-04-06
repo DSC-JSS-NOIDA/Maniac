@@ -73,7 +73,7 @@ def question(request):
         user = User.objects.get(id=request.user.id)
         if request.method == "GET":
             try:
-                last_solved_question = QuestionSolved.objects.filter(user__id=user.id).order_by('-created')[0]
+                last_solved_question = QuestionSolved.objects.filter(user__id=user.id).filter(~Q(answer=None)).order_by('-created')[0]
                 last_solved_question_id = last_solved_question.id 
             except:
                 last_solved_question_id = 0
@@ -106,7 +106,7 @@ def question(request):
             corresponding_question = QuestionSolved.objects.get(user=user, question__id=question_id)
             # to handle the case of the developers trying to make POST request to the urls
             if corresponding_question.answer == None:
-                QuestionSolved.objects.get(user=user, question__id=question_id).update(answer=answer)
+                QuestionSolved.objects.filter(user=user, question__id=question_id).update(answer=answer)
                 return HttpResponseRedirect(reverse_lazy('questions'))
             else:
                 return render(request, 'web/question.html', {'warning': 'You are trying to be smart enough. But, I am more smart than you :P'})

@@ -11,9 +11,11 @@
 		<div class="answer-panel">
 			<h5>Your Answer</h5>
 			<div class="row">
-				<form>
+				<form action="" method="post">
+				{% csrf_token %}
 					<div class="col l4 m4 s12">
-						<input type="text" required="">
+						<input type="text" required="" name="answer">
+						<input type="hidden" name='question_id' value="{{ question.id }}">
 					</div>
 					<div class="col l4 m4 s12">
 						<input id="ans-submit" type="submit">
@@ -28,8 +30,5 @@
 		{% endif %}
 	{% endif %}
 	</div>
-<!-- 	<div class="comic_img">
-		<img src="{% static 'images/hurry_up.jpg'%}" class="responsive-img">
-	</div> -->
 </div>
 {% endblock %}
