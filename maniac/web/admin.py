@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('descripton', 'answer', 'created', 'modified')
+    list_display = ('description', 'answer', 'created', 'modified')
 
 admin.site.register(Question, QuestionAdmin)
 

@@ -24,7 +24,7 @@ nav{
 	padding:20px;
 }
 .detailed-text p{
-	font-size:18px;
+	font-size:16px;
 	text-align: justify;
 }
 .login-btns{
@@ -147,7 +147,7 @@ nav{
 	text-align:justify;
 }
 .question-text p{
-	font-size:18px;
+	font-size:16px;
 }
 .answer-panel{
 	padding:10px;
@@ -178,17 +178,20 @@ nav{
 
 /*----------------------------------About------------------------------------------*/
 #about_wrapper{
+	background:url("../images/batman.jpg") no-repeat center;
+	background-size:cover;
 	position:relative;
 	width:100%;
 	height:100%;
+	min-height:700px;
 }
 .about-text{
-	max-width:800px;
 	padding:20px;
 	text-align:justify;
 }
 .about-text p{
-	font-size:18px;
+	color:#fff;
+	font-size:16px;
 }
 .about-panel{
 	padding:20px;
@@ -197,7 +200,6 @@ nav{
 /*----------------------------------Rules------------------------------------------*/
 #rules_wrapper{
 	background:url("../images/batman.jpg") no-repeat center;
-	background-color:rgb(128,128,128,0.3);
 	background-size:cover;
 	position:relative;
 	width:100%;

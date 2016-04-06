@@ -8,8 +8,9 @@
 			    <form id="registration-form" action="" method="post" onsubmit="return checkPasswords()">
 			    {% csrf_token %}
 			      <div class="row">
-			      	<!-- for showing messages -->
-						<!-- <p class="center-align" id="error-msg"><i class="material-icons tiny prefix">warning</i>  Uh Oh !! Here messages will be shown</p> -->
+			      	{% if error %}
+						<p class="center-align" id="error-msg"><i class="material-icons tiny prefix">warning</i>{{ error }}</p>
+			      	{% endif %}
 			        <div class="input-field col s6">
 			        	<i class="material-icons prefix">person_pin</i>
 						<input id="username" type="text" name="username" class="validate" required>

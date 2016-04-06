@@ -5,10 +5,12 @@
 		<div class="row reg-form">
 			<h4 class="center-align">Login</h4>
 			<p class="center-align">Not Registered Yet?? <a href="/register">Register</a></p>
-			<form class="col s12">
+			<form class="col s12" method="post" action="">
+			{% csrf_token %}
 		      	<div class="row">
-		      		<!-- for showing messages -->
-						<!-- <p class="center-align" id="error-msg"><i class="material-icons tiny prefix">warning</i>  Uh Oh !! Here messages will be shown</p> -->
+		      	{% if error %}
+						<p class="center-align" id="error-msg"><i class="material-icons tiny prefix">warning</i>{{error}}</p>
+				{% endif %}
 			        <div class="input-field col s12">
 			        	<i class="material-icons prefix">person_pin</i>
 						<input id="username" type="text" name="username" class="validate">
@@ -18,7 +20,7 @@
 			    <div class="row">
 			        <div class="input-field col s12">
 			        	<i class="material-icons prefix">lock</i>
-						<input id="password_1" type="password" name="password_1" class="validate">
+						<input id="password_1" type="password" name="password" class="validate">
 			         	<label for="password_!">Password</label>
 			        </div>
 			    </div>

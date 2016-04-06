@@ -13,7 +13,7 @@ class UserDetail(models.Model):
 
 
 class Question(models.Model):
-    descripton = models.TextField()
+    description = models.TextField()
     answer = models.CharField(max_length=1000)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     modified = models.DateTimeField(auto_now=True, blank=True, null=True)
