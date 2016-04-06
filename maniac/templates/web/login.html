@@ -1,20 +1,31 @@
+{% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-<div class="container" id="reg-page">
-
-	<div class="reg-form">
-		<form>
-			<div class="col s6">
-				<input type="text" placeholder="Username" name="username" required="">
-			</div>
-			<div class="col s6">
-				<input type="text" placeholder="Your Name" name="name" required="">
-			</div>
-			
-			<div class="col s6">
-				<input type="submit" placeholder="Password" name="password_2" required="">
-			</div>
-		</form>
-	</div>
+<div class="reg-wrapper">
+	<img src="{% static 'images/google.jpg' %}">
+		<div class="row reg-form">
+			<form class="col s12">
+		      	<div class="row">
+			        <div class="input-field col s12">
+			        	<i class="material-icons prefix">person_pin</i>
+						<input id="username" type="text" name="username" class="validate">
+			          	<label for="username">Username</label>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="input-field col s12">
+			        	<i class="material-icons prefix">lock</i>
+						<input id="password_1" type="password" name="password_1" class="validate">
+			         	<label for="password_!">Password</label>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="input-field col s12">
+						<input id="submit" type="submit">
+			        </div>
+			    </div>
+		    </form>
+		</div>
 </div>
+<div class="clearfix"></div>
 {% endblock %}
