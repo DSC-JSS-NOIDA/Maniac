@@ -27,22 +27,22 @@ def rules(request):
 
 def register(request):
     if not request.user.is_active:
-        if request.POST:
+        if request.method == "POST":
             username = request.POST['username']
             email = request.POST['email']
             password = request.POST['password']
-            name = request.POST['firstname']
+            name = request.POST['name']
             college = request.POST['college']
             phno = request.POST['phno']
             try:
                 user = User.objects.create_user(username=username,email=email,password=password,first_name=name,last_name='')
                 user.save()
-                UserDetail.objects.create(user = suser, college = college, phone_number = phno).save()
+                UserDetail.objects.create(user = user, college = college, phone_number = phno).save()
                 return HttpResponseRedirect(reverse_lazy('login'))
             except:
-                return render_to_response("web/register.html",{"error":"Hmm....I think you are already registered."})
+                return render(request, "web/register.html",{"error":"Hmm....I think you are already registered."})
         else:
-            return render_to_response("web/register.html")
+            return render(request, "web/register.html")
     else:
         return HttpResponseRedirect(reverse_lazy('index'))    
 
