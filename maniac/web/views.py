@@ -2,7 +2,12 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, render
 from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from datetime import timedelta
+from django.db.models import Q
+from django.core.urlresolvers import reverse_lazy
+
+import utils.constants as constants
+from datetime import datetime, timedelta
+
 import time
 import datetime
 import re
@@ -33,13 +38,13 @@ def register(request):
                 user = User.objects.create_user(username=username,email=email,password=password,first_name=name,last_name='')
                 user.save()
                 UserDetail.objects.create(user = suser, college = college, phone_number = phno).save()
-                return HttpResponseRedirect("/login")
+                return HttpResponseRedirect(reverse_lazy('login'))
             except:
-                return render_to_response("web/register.html",{"error":"Hmm....I think you are already registered."},context_instance = RequestContext(request))
+                return render_to_response("web/register.html",{"error":"Hmm....I think you are already registered."})
         else:
-            return render_to_response("web/register.html",context_instance=RequestContext(request))
+            return render_to_response("web/register.html")
     else:
-        return HttpResponseRedirect("/")    
+        return HttpResponseRedirect(reverse_lazy('index'))    
 
 
 def login(request):
@@ -50,41 +55,57 @@ def login(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None and user.is_active:
                 auth.login(request,user)
-                return HttpResponseRedirect("/google-it")
+                return HttpResponseRedirect(reverse_lazy('questions'))
             else:
-                return render_to_response("login.html",{"error":"Can you try with the correct credentials ??"},context_instance = RequestContext(request))
-        return render_to_response('login.html',context_instance=RequestContext(request))
+                return render(request, "web/login.html",{"error":"Can you try with the correct credentials ??"})
+        return render(request, 'web/login.html')
     else:
-        return HttpResponseRedirect("/google-it")
+        return HttpResponseRedirect(reverse_lazy('questions'))
 
 
-def question(request, question=1):
+def question(request):
     if request.user.is_authenticated():
+        user = User.objects.get(id=request.user.id)
         if request.method == "GET":
-            user = request.user
-            last_solved_question = QuestionSolved.objects.filter(user__id=request.user.id).order_by('-created')
+            last_solved_question = QuestionSolved.objects.filter(user__id=user.id).order_by('-created')
             start_date = timezone.now().date()
             end_date = start_date + timedelta( days=1 )
-            questions_solved_today = QuestionSolved.objects.filter(user__id=request.user.id, created__range=(start_date, end_date))
-            if questions_solved_today.count() >= 10:
-                return render(request, 'question.html', {'warning': 'You are done for the day. Come after 00:00 hours'})
+            # calculate the number of questions solved today
+            questions_solved_today = QuestionSolved.objects.filter(user__id=user.id, created__range=(start_date, end_date))
+            total_questions_solved_by_user = QuestionSolved.objects.filter(user__id=user.id).filter(~Q(answer=None))
+            total_questions = QuestionSolved.objects.all().count()
+            # check if user has already solved all the questions
+            if total_questions == total_questions_solved_by_user:
+                return render(request, 'web/finish.html')
+
+            date_when_user_joined = user.date_joined
+            delta_days = (timezone.now().date()-date_when_user_joined).days
+            # check if the user has solved all the questions to be displayed today only
+            if questions_solved_today.count() >= (delta_days+1)*constants.QUESTIONS_TO_BE_SOLVED_IN_A_DAY:
+                return render(request, 'web/question.html', {'warning': 'You are done for the day. Come next day to continue the contest.'})
             else:
                 next_question = Question.objects.get(id=last_solved_question+1)
-                if QuestionSolved.objects.filter(user=request.user, question__id=next_question.id).count()==0:
-                    QuestionSolved.objects.create(user=request.user, question__id=next_question.id)
-                    user = User.objects.get(id=request.user.id)
+                if QuestionSolved.objects.filter(user=user, question__id=next_question.id).count()==0:
+                    QuestionSolved.objects.create(user=user, question__id=next_question.id)
                     user.last_login=timezone.now()
                     user.save()
-                    return render(request, 'question.html', {'question': next_question, 'time_to_show': user.last_login})
-                else:
-                    pass
-                return render(request, 'question.html', {'question': next_question})
-    return render(request, 'web/question.html',{})
+
+                return render(request, 'web/question.html', {'question': next_question, 'time_to_show': user.last_login})
+        elif request.method == "POST":
+            answer = request.POST.get('answer', None)
+            question_id = request.POST.get('question_id', None)
+            corresponding_question = QuestionSolved.objects.get(user=user, question__id=question_id)
+            # to handle the case of the developers trying to make POST request to the urls
+            if corresponding_question.answer == None:
+                QuestionSolved.objects.get(user=user, question__id=question_id).update(answer=answer)
+                return HttpResponseRedirect(reverse_lazy('questions'))
+            else:
+                return render(request, 'web/question.html', {'warning': 'You are trying to be smart enough. But, I am more smart than you :P'})
 
 def about(request):
     return render(request, 'web/about.html')
 
 
-def leader_board(request):
+def leaderboard(request):
     users = UserDetail.objects.order_by('-CurrentQuestionNo')[:7:1]
     return render_to_response("leaderboard.html",{'users':users},context_instance = RequestContext(request))

@@ -4,25 +4,25 @@
       <a href="/" class="brand-logo">Google Maniac</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="/leader-board">Leaderboard</a></li>
-        <li><a href="/rules">Rules</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="{%url 'leaderboard'%}">Leaderboard</a></li>
+        <li><a href="{%url 'rules'%}">Rules</a></li>
+        <li><a href="{%url 'about'%}">About</a></li>
         {% if request.user.is_authenticated %}
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="{%url 'logout'%}">Logout</a></li>
         {% else %}
-          <li><a href="/register">Register</a></li>
-          <li><a href="/login">Login</a></li>
+          <li><a href="{%url 'register'%}">Register</a></li>
+          <li><a href="{% url 'login'%}">Login</a></li>
         {% endif %}
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="/leader-board">Leader Board</a></li>
-        <li><a href="/rules">Rules</a></li>
-        <li><a href="/about">About</a></li>
+        <li><a href="{%url 'leaderboard'%}">Leader Board</a></li>
+        <li><a href="{%url 'rules'%}">Rules</a></li>
+        <li><a href="{%url 'about'%}">About</a></li>
         {% if request.user.is_authenticated %}
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="{%url 'logout'%}">Logout</a></li>
         {% else %}
-          <li><a href="/register">Register</a></li>
-          <li><a href="/login">Login</a></li>
+          <li><a href="{% url 'register'%}">Register</a></li>
+          <li><a href="{% url 'login'%}">Login</a></li>
         {% endif %}
       </ul>
     </div>
