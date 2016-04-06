@@ -112,13 +112,11 @@ def question(request):
             else:
                 return render(request, 'web/question.html', {'warning': 'You are trying to be smart enough. But, I am more smart than you :P'})
 
-def about(request):
-    return render(request, 'web/about.html')
-
 
 def leaderboard(request):
     users = UserDetail.objects.order_by('-CurrentQuestionNo')[:7:1]
     return render_to_response("leaderboard.html",{'users':users},context_instance = RequestContext(request))
+
 
 def logout_view(request):
     logout(request)
