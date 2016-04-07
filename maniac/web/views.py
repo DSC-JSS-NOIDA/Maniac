@@ -3,15 +3,15 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, render
 from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponseNotFound
-from django.db.models import Q
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import auth
 from django.contrib.auth import logout
+from django.utils import timezone
+from django.db.models import Sum, F, Q
 
 from web.models import UserDetail, Question, QuestionSolved
 
 from datetime import datetime, timedelta
-from django.utils import timezone
 
 import time
 import math
@@ -116,13 +116,15 @@ def question(request):
                 QuestionSolved.objects.filter(user=user, question__id=question_id).update(answer=answer, time_based_score=time_based_score)
                 return render(request, 'web/continue.html')
             else:
-                return Httpresponse('<h2>You are trying to be smart enough. But, I am smarter than you :P</h2>')
+                return HttpResponse('<h2>You are trying to be smart enough. But, I am smarter than you :P</h2>')
 
 
 
 def leaderboard(request):
-    users = UserDetail.objects.order_by('-CurrentQuestionNo')[:7:1]
-    return render_to_response("leaderboard.html",{'users':users},context_instance = RequestContext(request))
+    # users = QuestionSolved.objects.annotate(total_score=Sum(F('time_based_score') + F('response_based_score'))).order_by('-total_score')
+    # print users
+    # return render(request, "web/leaderboard.html", {'users':users})
+    return render(request, "web/leaderboard.html",)
 
 
 def logout_view(request):
