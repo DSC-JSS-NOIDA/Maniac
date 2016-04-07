@@ -1,0 +1,14 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col s6">
+			<a href="{% url 'questions' %}" class="btn">Continue</a>
+		</div>
+		<div class="col s6">
+			<a href="{% url 'index' %}" class="btn">Play Later</a>
+		</div>
+	</div>
+</div>
+{% endblock %}
