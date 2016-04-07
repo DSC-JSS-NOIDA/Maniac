@@ -9,7 +9,7 @@ admin.site.register(Question, QuestionAdmin)
 
 
 class QuestionSolvedAdmin(admin.ModelAdmin):
-    list_display = ('question', 'user', 'answer', 'created', 'modified')
+    list_display = ('question', 'user', 'answer', 'response_based_score', 'time_based_score', 'created', 'modified')
 
 admin.site.register(QuestionSolved, QuestionSolvedAdmin)
 

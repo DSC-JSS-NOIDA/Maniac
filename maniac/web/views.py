@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 
 import time
+import math
 import datetime
 import re
 import utils.constants as constants
@@ -75,23 +76,26 @@ def question(request):
         if request.method == "GET":
             try:
                 last_solved_question = QuestionSolved.objects.filter(user__id=user.id).filter(~Q(answer=None)).order_by('-created')[0]
-                last_solved_question_id = last_solved_question.id 
+                last_solved_question_id = last_solved_question.question.id
             except:
                 last_solved_question_id = 0
+            # print "#################    ", last_solved_question_id
             start_date = timezone.now().date()
             end_date = start_date + timedelta( days=1 )
-            # calculate the number of questions solved today
-            questions_solved_today = QuestionSolved.objects.filter(user__id=user.id, created__range=(start_date, end_date))
-            total_questions_solved_by_user = QuestionSolved.objects.filter(user__id=user.id).filter(~Q(answer=None))
-            total_questions = QuestionSolved.objects.all().count()
+            # calculate the number of questions solved
+            # questions_solved_today = QuestionSolved.objects.filter(user__id=user.id, created__range=(start_date, end_date))
+            total_questions_solved_by_user = QuestionSolved.objects.filter(user__id=user.id).filter(~Q(answer=None)).count()
+            total_questions = Question.objects.all().count()
             # check if user has already solved all the questions
             if total_questions == total_questions_solved_by_user:
                 return render(request, 'web/finish.html')
 
-            date_when_user_joined = user.date_joined.date()
-            delta_days = (timezone.now().date()-date_when_user_joined).days
+            date_when_user_joined = timezone.localtime(user.date_joined).date()
+            event_start_date = datetime.datetime.strptime(constants.START_DATE, '%d/%m/%Y').date()
+            delta_days = (timezone.localtime(timezone.now()).date() - event_start_date).days
             # check if the user has solved all the questions to be displayed today only
-            if questions_solved_today.count() >= (delta_days+1)*constants.QUESTIONS_TO_BE_SOLVED_IN_A_DAY:
+            # print "THRESHOLD IS ", (delta_days+1)*constants.QUESTIONS_TO_BE_SOLVED_IN_A_DAY
+            if total_questions_solved_by_user >= (delta_days+1)*constants.QUESTIONS_TO_BE_SOLVED_IN_A_DAY:
                 return render(request, 'web/question.html', {'warning': 'You are done for the day. Come next day to continue the contest.'})
             else:
                 next_question = Question.objects.get(id=last_solved_question_id+1)
@@ -105,12 +109,15 @@ def question(request):
             answer = request.POST.get('answer', None)
             question_id = request.POST.get('question_id', None)
             corresponding_question = QuestionSolved.objects.get(user=user, question__id=question_id)
+            time_diff = (timezone.now()-timezone.localtime(corresponding_question.created)).total_seconds()/60
+            time_based_score = constants.TIME_BASED_SCORE_MAX_VALUE/math.ceil(time_diff)
             # to handle the case of the developers trying to make POST request to the urls
             if corresponding_question.answer == None:
-                QuestionSolved.objects.filter(user=user, question__id=question_id).update(answer=answer)
-                return HttpResponseRedirect(reverse_lazy('questions'))
+                QuestionSolved.objects.filter(user=user, question__id=question_id).update(answer=answer, time_based_score=time_based_score)
+                return render(request, 'web/continue.html')
             else:
-                return render(request, 'web/question.html', {'warning': 'You are trying to be smart enough. But, I am more smart than you :P'})
+                return Httpresponse('<h2>You are trying to be smart enough. But, I am smarter than you :P</h2>')
+
 
 
 def leaderboard(request):
