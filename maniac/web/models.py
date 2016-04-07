@@ -23,5 +23,7 @@ class QuestionSolved(models.Model):
     question = models.ForeignKey(Question, related_name='question')
     user = models.ForeignKey(User, related_name='user')
     answer = models.CharField(max_length=10000, blank=True, null=True, default=None)
+    time_based_score = models.FloatField(blank=True, null=True, default=0)
+    response_based_score = models.FloatField(blank=True, null=True, default=0)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     modified = models.DateTimeField(auto_now=True, blank=True, null=True)
