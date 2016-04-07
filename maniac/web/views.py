@@ -119,9 +119,6 @@ def question(request):
                 return Httpresponse('<h2>You are trying to be smart enough. But, I am smarter than you :P</h2>')
 
 
-def about(request):
-    return render(request, 'web/about.html')
-
 
 def leaderboard(request):
     users = UserDetail.objects.order_by('-CurrentQuestionNo')[:7:1]

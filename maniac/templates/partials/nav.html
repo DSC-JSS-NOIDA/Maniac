@@ -6,7 +6,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="{%url 'leaderboard'%}">Leaderboard</a></li>
         <li><a href="{%url 'rules'%}">Rules</a></li>
-        <li><a href="{%url 'about'%}">About</a></li>
+        <li><a href="https://facebook.com/" target="_blank">Forum</a></li>
         {% if request.user.is_authenticated %}
           <li><a href="{%url 'logout'%}">Logout</a></li>
         {% else %}
@@ -17,7 +17,7 @@
       <ul class="side-nav" id="mobile-demo">
         <li><a href="{%url 'leaderboard'%}">Leader Board</a></li>
         <li><a href="{%url 'rules'%}">Rules</a></li>
-        <li><a href="{%url 'about'%}">About</a></li>
+        <li><a href="https://facebook.com/" target="_blank">Forum</a></li>
         {% if request.user.is_authenticated %}
           <li><a href="{%url 'logout'%}">Logout</a></li>
         {% else %}

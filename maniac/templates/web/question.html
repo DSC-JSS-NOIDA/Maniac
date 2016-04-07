@@ -26,7 +26,10 @@
 		<div class="clearfix"></div>
 	{% else %}
 		{% if warning %}
-			<p>{{ warning }}</p>
+			<div class="container center-align">
+			<p id="q-complete-msg">{{ warning }}</p>
+				<img src="{% static 'images/google-cartoon.png' %}">
+			</div>
 		{% endif %}
 	{% endif %}
 	</div>
