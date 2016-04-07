@@ -179,6 +179,42 @@ nav{
 #q-complete-msg{
 	font-size:20px;
 }
+.cont-wrapper{
+	position: relative;
+	min-height:700px;
+	overflow-y:hidden;
+}
+#res-record{
+	position:absolute;
+	width:500px;
+	height:200px;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-250px;
+}
+#bot-img img{
+	padding-top:20px;
+	width:500px;
+}
+@media screen and (max-width:480px){
+	#res-record{
+	width:300px;
+	height:200px;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-150px;
+	}
+	#bot-img img{
+	width:300px;
+	}
+}
+.continue-btn{
+	width:200px;
+	margin-top: 10px;
+}
+
 
 /*----------------------------------Rules------------------------------------------*/
 #rules_wrapper{

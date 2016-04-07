@@ -116,8 +116,7 @@ def question(request):
                 QuestionSolved.objects.filter(user=user, question__id=question_id).update(answer=answer, time_based_score=time_based_score)
                 return render(request, 'web/continue.html')
             else:
-                return Httpresponse('<h2>You are trying to be smart enough. But, I am smarter than you :P</h2>')
-
+                return render(request, 'web/over_smart.html')
 
 
 def leaderboard(request):

@@ -1,13 +1,23 @@
 {% extends 'partials/base.html' %}
 {% load static %}
 {% block content %}
-<div class="container">
-	<div class="row">
-		<div class="col s6">
-			<a href="{% url 'questions' %}" class="btn">Continue</a>
-		</div>
-		<div class="col s6">
-			<a href="{% url 'index' %}" class="btn">Play Later</a>
+<div class="cont-wrapper">
+	<div id="res-record">
+		<div class="clearfix"></div>
+		<div class="center-align">
+			<h5>Great!! Your Response has been recorded. <br> We know you are a human being and not a bot so you can take rest.</h5>
+			<div class="row">
+				<div class="col l6 m6 s12">
+					<a href="{% url 'questions' %}" class="btn continue-btn">Continue Playing</a>
+				</div>
+				<div class="col l6 m6 s12">
+					<a href="{% url 'index' %}" class="btn continue-btn">Play Later</a>
+				</div>
+				<br>
+				<div class="col s12" id="bot-img">
+					<img src="{% static 'images/bot.gif' %}" class="responsive-img">
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
